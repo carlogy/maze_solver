@@ -15,8 +15,9 @@ def main():
     cell1.draw()
     cell2 = Cell(True, False, True, False, 30, 40, 50, 60, win)
     cell2.draw()
-    cell3 = Cell(False, False, True, True, 550, 560, 560, 570, win)
+    cell3 = Cell(False, False, True, True, 40, 50, 60, 70, win)
     cell3.draw()
+    cell2.draw_move(cell3)
     win.wait_for_close()
 
 main()
