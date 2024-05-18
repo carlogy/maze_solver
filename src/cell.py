@@ -30,8 +30,9 @@ class Cell:
 
     def draw_move(self, to_cell, undo=False):
 
-        if undo == False:
-            line_color = "red"
+        if undo:
+            line_color = "gray"
+        line_color = "red"
 
         mid_x_axis1 = (self._x1 + to_cell._x1) / 2
         mid_y_axis1 = (self._y1 + to_cell._y1) / 2
@@ -40,4 +41,4 @@ class Cell:
         pointA = Point(mid_x_axis1, mid_y_axis1)
         pointB = Point(mid_x_axis2, mid_y_axis2)
 
-        self._win.draw_line(Line(pointA, pointB))
+        self._win.draw_line(Line(pointA, pointB), line_color)
