@@ -1,4 +1,7 @@
 
+from cell import Cell
+
+
 class Maze:
     def __init__(
                     self,
@@ -17,3 +20,15 @@ class Maze:
         self.cell_size_y = cell_size_y
         self.win = win
         self._create_cells()
+
+    def _create_cells(self):
+        self.cells = []
+        for i in range(self.num_rows):
+            cells_row = []
+
+
+    def _draw_cell(self, I, J):
+        pass
+
+    def _animate(self):
+        pass
