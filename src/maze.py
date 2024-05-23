@@ -26,12 +26,13 @@ class Maze:
             column = [Cell(self.win) for i in range(self.num_rows // self.cell_size_y)]
             self.cells.append(column)
         else:
-            for i in self.cells:
-                for j in self.cells[i]:
+            for i in range(len(self.cells)):
+                for j in range(len(self.cells[i])):
                     self._draw_cell(i,j)
 
     def _draw_cell(self, I, J):
         pass
+
 
     def _animate(self):
         pass
