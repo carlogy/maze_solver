@@ -28,11 +28,14 @@ class Maze:
         else:
             for i in range(len(self.cells)):
                 for j in range(len(self.cells[i])):
-                    self._draw_cell(i,j)
+                    self.cells[i][j]._draw_cell(i,j) #this was updated to call the draw_cell maze method on the specific cell in matrix.
 
     def _draw_cell(self, I, J):
-        pass
+        # This method should calculate the x/y position of the Cell based on i, j, the cell_size, and the x/y position of the Maze itself.
+        # The x/y position of the maze represents how many pixels from the top and left the maze should start from the side of the window.
+        cell_x = self.x1 * (I * self.cell_size_x)
+        cell_y = self.y1 * (J * self.cell_size_y)
 
-
+        self._animate()
     def _animate(self):
-        pass
+        self.win.redraw()
