@@ -1,4 +1,5 @@
 import time
+import random
 
 from cell import Cell
 
@@ -11,7 +12,8 @@ class Maze:
                     num_cols,
                     cell_size_x,
                     cell_size_y,
-                    win):
+                    win,
+                    seed=None):
         self.x1 = x1
         self.y1 = y1
         self.num_rows = num_rows
@@ -19,6 +21,9 @@ class Maze:
         self.cell_size_x = cell_size_x
         self.cell_size_y = cell_size_y
         self.win = win
+        if seed != None:
+            self.seed = random.seed(seed)
+
         self._create_cells()
 
     def _create_cells(self):
@@ -46,6 +51,34 @@ class Maze:
         j = len(self.cells[i]) -1
         self.cells[i][j].has_bottom_wall = False
         self._draw_cell(i,j)
+
+    def break_walls_r(self, i, j):
+        self.cells[i][j].visited = True
+        loop = True
+        while loop:
+            visited_cells = []
+            cell_below = self.cells[i][j + 1]
+            cell_right = self.cells[i + 1][j]
+            cell_left = self.cells[i - 1][j]
+            cell_above = self.cells[i][j - 1]
+            if cell_left.visited == False:
+                visited_cells.append((i, j + 1))
+            if cell_right.visited == False:
+                visited_cells.append((i + 1, j))
+            if cell_below.visited == False:
+               visited_cells.append((i, j + 1))
+            if cell_above.visited == False:
+               visited_cells.append((i, j + 1))
+            if (
+                cell_left.visited == True and
+                cell_right.visited == True and
+                cell_above.visited == True and
+                cell_below.visited == True):
+                    return
+            direction = random.Random(len(visited_cells))
+
+
+
 
     def _animate(self):
         self.win.redraw()
