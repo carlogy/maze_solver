@@ -56,26 +56,42 @@ class Maze:
         self.cells[i][j].visited = True
         loop = True
         while loop:
-            visited_cells = []
+            options = []
             cell_below = self.cells[i][j + 1]
             cell_right = self.cells[i + 1][j]
             cell_left = self.cells[i - 1][j]
             cell_above = self.cells[i][j - 1]
-            if cell_left.visited == False:
-                visited_cells.append((i, j + 1))
-            if cell_right.visited == False:
-                visited_cells.append((i + 1, j))
-            if cell_below.visited == False:
-               visited_cells.append((i, j + 1))
-            if cell_above.visited == False:
-               visited_cells.append((i, j + 1))
+            if not cell_left.visited:
+                options.append((i, j + 1))
+            if not cell_right.visited:
+                options.append((i + 1, j))
+            if not cell_below.visited:
+               options.append((i, j + 1))
+            if not cell_above.visited:
+               options.append((i, j + 1))
             if (
                 cell_left.visited == True and
                 cell_right.visited == True and
                 cell_above.visited == True and
                 cell_below.visited == True):
                     return
-            direction = random.Random(len(visited_cells))
+            direction = random.randrange(0,len(options))
+            if options[direction][0] == i:
+                if j < options[direction][1]:
+                    self.cells[i][options[direction][1]].has_bottom_wall = False
+                    self.break_walls_r(options[direction][0], options[direction][1])
+                if j > options[direction][1]:
+                    self.cells[i][options[direction][1]].has_top_wall = False
+                    self.break_walls_r(options[direction][0], options[direction][1])
+                elif options[direction][0] > i:
+                    self.cells[options[direction][0]][j].has_right_wall = False
+                    self.break_walls_r(options[direction][0], options[direction][1])
+                elif options[direction][0] < i:
+                   self.cells[options[direction][0]][j].has_left_wall = False
+                   self.break_walls_r(options[direction][0], options[direction][1])
+
+
+
 
 
 
