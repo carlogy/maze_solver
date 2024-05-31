@@ -52,7 +52,7 @@ class Maze:
         self.cells[i][j].has_bottom_wall = False
         self._draw_cell(i,j)
 
-    def break_walls_r(self, i, j):
+    def _break_walls_r(self, i, j):
         self.cells[i][j].visited = True
         loop = True
         while loop:
@@ -79,21 +79,20 @@ class Maze:
             if options[direction][0] == i:
                 if j < options[direction][1]:
                     self.cells[i][options[direction][1]].has_bottom_wall = False
-                    self.break_walls_r(options[direction][0], options[direction][1])
+                    self._break_walls_r(options[direction][0], options[direction][1])
                 if j > options[direction][1]:
                     self.cells[i][options[direction][1]].has_top_wall = False
-                    self.break_walls_r(options[direction][0], options[direction][1])
+                    self._break_walls_r(options[direction][0], options[direction][1])
                 elif options[direction][0] > i:
                     self.cells[options[direction][0]][j].has_right_wall = False
-                    self.break_walls_r(options[direction][0], options[direction][1])
+                    self._break_walls_r(options[direction][0], options[direction][1])
                 elif options[direction][0] < i:
                    self.cells[options[direction][0]][j].has_left_wall = False
-                   self.break_walls_r(options[direction][0], options[direction][1])
+                   self._break_walls_r(options[direction][0], options[direction][1])
 
-
-
-
-
+    def _reset_cells_visited(self):
+        for cell in self.cells:
+            cell.visited = False
 
 
     def _animate(self):
