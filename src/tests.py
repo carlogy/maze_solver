@@ -78,6 +78,45 @@ class Tests(unittest.TestCase):
             False
         )
 
+    def test_break_walls_r(self):
+        num_cols = 2
+        num_rows = 2
+        win=Window(10,10)
+        m1 = Maze(
+            x1=0,
+            y1=0,
+            num_rows=num_rows,
+            num_cols=num_cols,
+            cell_size_x=2,
+            cell_size_y=2,
+            win=win
+        )
+
+        m1._break_walls_r(0,0)
+        # review logic for finding adjecent cells and address the IndexError.
+        # Then assert adjecnt cell has_wall chek.
+
+    def test_reset_cells(self):
+        num_cols = 10
+        num_rows = 10
+        win = Window(100,100)
+        m1 = Maze(
+            x1=0,
+            y1=0,
+            num_rows=num_rows,
+            num_cols=num_cols,
+            cell_size_x=10,
+            cell_size_y=10,
+            win=win
+        )
+
+        m1.cells[0][0].visited = True
+        m1._reset_cells_visited()
+        self.assertEqual(
+            False,
+            m1.cells[0][0].visited
+        )
+
 
 
 
