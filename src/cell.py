@@ -10,7 +10,11 @@ class Cell:
         self._x2 = None
         self._y1 = None
         self._y2 = None
+        self.visited = False
         self._win = win
+
+    def __repr__(self):
+        return f"Left: {self.has_left_wall}\nTop: {self.has_top_wall}\nRight: {self.has_right_wall}\nBottom: {self.has_bottom_wall}\nVisited: {self.visited}"
 
     def draw(self, x1, y1, x2, y2):
         if self._win is None:
